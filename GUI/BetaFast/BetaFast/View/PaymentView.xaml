@@ -1,0 +1,329 @@
+<UserControl x:Class="BetaFast.View.PaymentView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:BetaFast.View"
+             xmlns:controls="clr-namespace:BetaFast.View.Controls"
+             Background="Silver"
+             mc:Ignorable="d"
+             d:DesignHeight="750"
+             d:DesignWidth="1200"
+             MinHeight="750"
+             MinWidth="1200">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="80" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Border Grid.Row="0"
+                BorderBrush="Black"
+                BorderThickness="0 0 0 2">
+            <Grid Grid.Row="0"
+                  Background="{StaticResource BetaFastDark}">
+
+                <controls:NavigationBar />
+
+                <!-- Title -->
+                <TextBlock HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           FontSize="40"
+                           Foreground="White"
+                           Text="Payment Details" />
+            </Grid>
+        </Border>
+
+        <Grid Grid.Row="1"
+              HorizontalAlignment="Center"
+              Margin="10,30,10,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1180" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="520" />
+                <RowDefinition Height="40" />
+                <RowDefinition Height="80" />
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0"
+                  HorizontalAlignment="Center"
+                  Margin="0,0,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="590" />
+                    <ColumnDefinition Width="590" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="163" />
+                    <RowDefinition Height="150" />
+                    <RowDefinition Height="150" />
+                    <RowDefinition Height="50" />
+                </Grid.RowDefinitions>
+
+                <!-- Credit Card Logo -->
+                <Image x:Name="BetaBankLogo"
+                       Grid.Row="0"
+                       Grid.Column="1"
+                       MaxWidth="120"
+                       MaxHeight="120"
+                       VerticalAlignment="Center"
+                       Source="/Images/BetaBankLogo.png" />
+                <TextBlock Text="Beta Bank - A Trusted Bank*"
+                           Margin="0,140,0,0"
+                           Grid.Row="0"
+                           Grid.Column="1"
+                           TextWrapping="Wrap"
+                           Width="300"
+                           TextAlignment="Center"
+                           VerticalAlignment="Center"
+                           FontSize="18">
+                </TextBlock>
+
+                <!-- Name on Card -->
+                <TextBlock Text="Name on card"
+                           Margin="0,0,0,60"
+                           Grid.Row="0"
+                           Grid.Column="0"
+                           TextWrapping="Wrap"
+                           Width="300"
+                           TextAlignment="Left"
+                           VerticalAlignment="Center"
+                           FontSize="24">
+                </TextBlock>
+                <TextBox x:Name="NameOnCardTextbox"
+                         Grid.Row="0"
+                         Grid.Column="0"
+                         Text="{Binding NameOnCard}"
+                         Margin="0,20,0,0"
+                         Width="300"
+                         Height="32"
+                         FontSize="20"
+                         MaxLength="100">
+                </TextBox>
+
+                <!-- Zip Code -->
+                <TextBlock Text="Zip code"
+                           Margin="0,0,0,60"
+                           Grid.Row="2"
+                           Grid.Column="1"
+                           TextWrapping="Wrap"
+                           Width="300"
+                           TextAlignment="Left"
+                           VerticalAlignment="Center"
+                           FontSize="24">
+                </TextBlock>
+                <TextBox x:Name="ZipCodeTextBox"
+                         Grid.Row="2"
+                         Grid.Column="1"
+                         Text="{Binding ZipCode}"
+                         Margin="0,20,0,0"
+                         Width="300"
+                         Height="32"
+                         FontSize="20"
+                         MaxLength="5">
+                </TextBox>
+
+                <!-- Card Number -->
+                <TextBlock Text="Card number"
+                           Margin="0,0,0,60"
+                           Grid.Row="1"
+                           Grid.Column="0"
+                           TextWrapping="Wrap"
+                           Width="300"
+                           TextAlignment="Left"
+                           VerticalAlignment="Center"
+                           FontSize="24">
+                </TextBlock>
+                <TextBox x:Name="CardNumberBox"
+                         Grid.Row="1"
+                         Grid.Column="0"
+                         Text="{Binding CardNumber}"
+                         Margin="0,20,0,0"
+                         Width="300"
+                         Height="32"
+                         FontSize="20"
+                         MaxLength="19">
+                </TextBox>
+
+                <!-- Expiry Date -->
+                <TextBlock Text="Expiry date (MM/YYYY)"
+                           Margin="0,0,0,60"
+                           Grid.Row="1"
+                           Grid.Column="1"
+                           TextWrapping="Wrap"
+                           Width="300"
+                           TextAlignment="Left"
+                           VerticalAlignment="Center"
+                           FontSize="24">
+                </TextBlock>
+                <TextBox x:Name="ExpiryDateBox"
+                         Grid.Row="1"
+                         Grid.Column="1"
+                         Text="{Binding ExpiryDate}"
+                         Margin="0,20,0,0"
+                         Width="300"
+                         Height="32"
+                         FontSize="20"
+                         MaxLength="7">
+                </TextBox>
+
+                <!-- CVC -->
+                <TextBlock Text="CVC"
+                           Margin="0,0,0,60"
+                           Grid.Row="2"
+                           Grid.Column="0"
+                           TextWrapping="Wrap"
+                           Width="300"
+                           TextAlignment="Left"
+                           VerticalAlignment="Center"
+                           FontSize="24">
+                </TextBlock>
+                <TextBox x:Name="CVCBox"
+                         Grid.Row="2"
+                         Grid.Column="0"
+                         Text="{Binding CVC}"
+                         Margin="0,20,0,0"
+                         Width="300"
+                         Height="32"
+                         FontSize="20"
+                         MaxLength="4">
+                </TextBox>
+
+                <!-- Remember Me -->
+                <StackPanel Grid.Row="3"
+                            Grid.Column="0"
+                            Orientation="Vertical"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Margin="0,0,0,0">
+                    <TextBlock Text="Enter the CVC of your saved credit card"
+                               Margin="0,0,10,0"
+                               Grid.Row="2"
+                               Grid.Column="0"
+                               TextWrapping="Wrap"
+                               Width="400"
+                               TextAlignment="Center"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               FontSize="18">
+                    </TextBlock>
+                    <StackPanel Orientation="Horizontal"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center">
+                        <TextBox x:Name="passwordBox"
+                                 Grid.Row="2"
+                                 Grid.Column="0"
+                                 Text="{Binding Password}"
+                                 Margin="0,0,0,0"
+                                 Width="50"
+                                 Height="30"
+                                 FontSize="18"
+                                 MaxLength="4"
+                                 HorizontalAlignment="Center">
+                        </TextBox>
+                        <!-- Load Payment Details -->
+                        <Button x:Name="LoadPaymentButton"
+                                Command="{Binding Load}"
+                                Width="200"
+                                Height="30"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                Foreground="White"
+                                Background="{StaticResource BetaFastLight}"
+                                FontSize="18"
+                                Content="Load Payment Details"
+                                HorizontalContentAlignment="Center"
+                                VerticalContentAlignment="Center"
+                                Margin="30,0,0,0" />
+                    </StackPanel>
+                </StackPanel>
+
+                <StackPanel Grid.Row="3"
+                            Grid.Column="1"
+                            Orientation="Horizontal"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Margin="0,0,0,0">
+                    <CheckBox IsChecked="{Binding IsSelected}"
+                              HorizontalAlignment="Center"
+                              VerticalAlignment="Center" />
+                    <TextBox Background="Silver"
+                             Text="Save Payment Details"
+                             FontSize="18" />
+                    <!-- Delete Payment Details -->
+                    <Button x:Name="DeletePaymentButton"
+                            Command="{Binding Delete}"
+                            Width="200"
+                            Height="30"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            Foreground="Blue"
+                            Background="Silver"
+                            FontSize="18"
+                            Content="Delete Payment Details"
+                            HorizontalContentAlignment="Center"
+                            VerticalContentAlignment="Center"
+                            Margin="30,0,0,0" />
+                </StackPanel>
+            </Grid>
+
+            <TextBlock Text="{Binding Message}"
+                       Foreground="Red"
+                       Margin="0,0,0,0"
+                       Grid.Row="1"
+                       Grid.Column="0"
+                       TextWrapping="Wrap"
+                       Width="500"
+                       TextAlignment="Left"
+                       VerticalAlignment="Bottom"
+                       HorizontalAlignment="Left"
+                       FontSize="16">
+            </TextBlock>
+
+            <TextBlock Text="{Binding TotalPrice}"
+                       Margin="0,0,0,0"
+                       Grid.Row="1"
+                       Grid.Column="0"
+                       TextWrapping="Wrap"
+                       Width="300"
+                       TextAlignment="Right"
+                       VerticalAlignment="Bottom"
+                       HorizontalAlignment="Right"
+                       FontSize="24">
+            </TextBlock>
+
+            <TextBlock Text="*Beta Bank is trusted by parts of the territory of Guam. Beta Bank is the only credit card issuer accepted by BetaFast."
+                       Margin="0,0,0,0"
+                       Grid.Column="0"
+                       Grid.Row="2"
+                       TextWrapping="Wrap"
+                       Width="800"
+                       TextAlignment="Left"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Left"
+                       FontSize="12">
+            </TextBlock>
+
+            <!-- Pay Button -->
+            <Button x:Name="PayButton"
+                    Grid.Column="0"
+                    Grid.Row="2"
+                    Command="{Binding Pay}"
+                    Width="60"
+                    Height="30"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Center"
+                    Background="{StaticResource BetaFastLight}"
+                    FontSize="16"
+                    Content="Pay"
+                    HorizontalContentAlignment="Center"
+                    VerticalContentAlignment="Center"
+                    Foreground="White"
+                    Margin="0,15,0,15" />
+        </Grid>
+    </Grid>
+</UserControl>

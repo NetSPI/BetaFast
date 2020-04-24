@@ -1,0 +1,151 @@
+﻿<UserControl x:Class="BetaFast.View.ShoppingCartView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:BetaFast.View"
+             xmlns:controls="clr-namespace:BetaFast.View.Controls"
+             Background="Silver"
+             mc:Ignorable="d"
+             d:DesignHeight="750"
+             d:DesignWidth="1200"
+             MinHeight="750"
+             MinWidth="1200">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="80" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Border Grid.Row="0"
+                BorderBrush="Black"
+                BorderThickness="0 0 0 2">
+            <Grid Grid.Row="0"
+                  Background="{StaticResource BetaFastDark}">
+
+                <controls:NavigationBar />
+
+                <!-- Title -->
+                <TextBlock HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           FontSize="40"
+                           Foreground="White"
+                           Text="Shopping Cart" />
+            </Grid>
+        </Border>
+
+        <Grid Grid.Row="1"
+              HorizontalAlignment="Center"
+              Margin="10,30,10,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"
+                                  MinWidth="1040"/>
+                <ColumnDefinition Width="60" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="40" />
+                <RowDefinition Height="80" />
+            </Grid.RowDefinitions>
+
+            <Button x:Name="DeleteButton"
+                    Grid.Column="1"
+                    Grid.Row="0"
+                    Command="{Binding Delete}"
+                    Width="60"
+                    Height="40"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Top"
+                    Background="Silver"
+                    FontSize="16"
+                    Content="Delete"
+                    HorizontalContentAlignment="Center"
+                    VerticalContentAlignment="Center"
+                    Foreground="Blue"
+                    Margin="0,15,0,15" />
+
+            <ListView x:Name="MovieList"
+                      Grid.Row="0"
+                      Grid.Column="0"
+                      Margin="10,10,10,10"
+                      HorizontalAlignment="Stretch"
+                      VerticalAlignment="Top"
+                      ScrollViewer.VerticalScrollBarVisibility="Auto"
+                      ScrollViewer.HorizontalScrollBarVisibility="Auto"
+                      ItemsSource="{Binding MoviesInCart}"
+                      Height="auto"
+                      Width="auto"
+                      SelectedItem="{Binding SelectedMovie}"
+                      Background="Silver">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <UniformGrid Columns="1"
+                                     HorizontalAlignment="Stretch" />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal"
+                                    VerticalAlignment="Stretch"
+                                    HorizontalAlignment="Stretch">
+                            <Image Source="{Binding Poster.Image}"
+                                   HorizontalAlignment="Left"
+                                   VerticalAlignment="Center"
+                                   Height="225"
+                                   Width="150" />
+                            <StackPanel Orientation="Vertical"
+                                        VerticalAlignment="Stretch"
+                                        HorizontalAlignment="Stretch">
+                                <TextBlock Text="{Binding Title}"
+                                           HorizontalAlignment="Left"
+                                           VerticalAlignment="Top"
+                                           FontSize="18"
+                                           TextWrapping="NoWrap"
+                                           MaxWidth="300" />
+                                <TextBlock Text="{Binding Price}"
+                                           HorizontalAlignment="Left"
+                                           VerticalAlignment="Top"
+                                           FontSize="18"
+                                           TextWrapping="NoWrap"
+                                           MaxWidth="300" />
+                            </StackPanel>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+            <TextBlock Text="{Binding TotalPrice}"
+                       Margin="0,0,0,0"
+                       Grid.Row="1"
+                       Grid.Column="0"
+                       TextWrapping="Wrap"
+                       Width="300"
+                       TextAlignment="Right"
+                       VerticalAlignment="Bottom"
+                       HorizontalAlignment="Right"
+                       FontSize="24">
+            </TextBlock>
+
+            <!-- Confirm Payment Button -->
+            <Button x:Name="ConfirmPaymentButton"
+                    Grid.Column="0"
+                    Grid.Row="2"
+                    Command="{Binding ConfirmPayment}"
+                    Width="200"
+                    Height="40"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Center"
+                    Background="{StaticResource BetaFastLight}"
+                    FontSize="24"
+                    Content="Confirm Payment"
+                    HorizontalContentAlignment="Center"
+                    VerticalContentAlignment="Center"
+                    Foreground="White"
+                    Margin="0,15,0,15" />
+        </Grid>
+    </Grid>
+</UserControl>

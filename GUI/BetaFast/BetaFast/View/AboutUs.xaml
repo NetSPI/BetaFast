@@ -1,0 +1,187 @@
+﻿<UserControl x:Class="BetaFast.View.AboutUs"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:BetaFast.View"
+             xmlns:properties="clr-namespace:BetaFast.ViewProperties"
+             xmlns:controls="clr-namespace:BetaFast.View.Controls"
+             Background="Silver"
+             mc:Ignorable="d"
+             d:DesignHeight="750"
+             d:DesignWidth="1200"
+             MinHeight="750"
+             MinWidth="1200">
+
+    <Grid HorizontalAlignment="Stretch"
+          VerticalAlignment="Stretch">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="80" />
+            <RowDefinition Height="60" />
+            <RowDefinition Height="1.5*" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0"
+              Grid.Column="0"
+              HorizontalAlignment="Stretch"
+              VerticalAlignment="Stretch"
+              Background="{StaticResource BetaFastDark}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"
+                                  MinWidth="1200" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <controls:NavigationBar />
+
+            <!-- Title -->
+            <TextBlock Text="About Us"
+                       Grid.Row="0"
+                       Grid.Column="0"
+                       Margin="100,10,0,0"
+                       TextWrapping="Wrap"
+                       Width="700"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Top"
+                       FontSize="40"
+                       Foreground="White">
+            </TextBlock>
+        </Grid>
+
+        <Grid Grid.Row="1"
+              Grid.Column="0"
+              HorizontalAlignment="Stretch"
+              VerticalAlignment="Stretch">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"
+                                  MinWidth="1200" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Border Grid.Row="1"
+                    Grid.Column="0"
+                    Margin="0,0,0,10"
+                    BorderBrush="Black"
+                    BorderThickness="0 2 0 2"
+                    Background="{StaticResource BetaFastLight}">
+                <!-- Welcome Message -->
+                <TextBlock Text="Betamax Rentals of the Future"
+                           Grid.Row="1"
+                           Grid.Column="0"
+                           Margin="0,0,0,0"
+                           TextWrapping="Wrap"
+                           Width="430"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           FontSize="32">
+                </TextBlock>
+            </Border>
+        </Grid>
+        <Grid Grid.Row="2"
+              Grid.Column="0"
+              HorizontalAlignment="Stretch"
+              VerticalAlignment="Stretch">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0"
+                  Grid.Column="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+                <Border Grid.Row="0"
+                        Grid.Column="1"
+                        BorderBrush="Black"
+                        BorderThickness="2 2 2 2"
+                        Background="White">
+                    <Image x:Name="Kiosk"
+                           Grid.Row="0"
+                           Grid.Column="1"
+                           Margin="0,0,0,0"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Center"
+                           Source="/Images/kiosk.png" />
+                </Border>
+            </Grid>
+        </Grid>
+
+        <Grid Grid.Row="3"
+              Grid.Column="0"
+              HorizontalAlignment="Stretch"
+              VerticalAlignment="Stretch">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"
+                                  MinWidth="1200" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="2*" />
+                <RowDefinition Height="0.5*" />
+            </Grid.RowDefinitions>
+
+            <Border Grid.Row="0"
+                    Grid.Column="0"
+                    Margin="0,10,0,0"
+                    BorderBrush="Black"
+                    BorderThickness="0 2 0 2"
+                    Background="{StaticResource BetaFastLight}">
+                <TextBlock Text="Trustworthy, Innovative, Secure"
+                           Grid.Row="0"
+                           Grid.Column="0"
+                           Margin="0,0,0,0"
+                           TextWrapping="Wrap"
+                           Width="450"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           FontSize="32">
+                </TextBlock>
+            </Border>
+
+            <Border Grid.Row="1"
+                    Grid.Column="0"
+                    Margin="0,0,0,0"
+                    BorderBrush="Black"
+                    BorderThickness="0 0 0 2"
+                    Background="White">
+                <TextBlock Text="Developed by an entrepreneur with a mysterious past, Betafast makes Betamax tapes only moments away. Just visit one of our 3 Betafast kiosks in Bloomington, Illinois and find out how much time and money you could be saving with your next movie rental!*"
+                           Grid.Row="1"
+                           Grid.Column="0"
+                           Margin="0,0,0,0"
+                           TextWrapping="Wrap"
+                           Width="1000"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           FontSize="24">
+                </TextBlock>
+            </Border>
+
+            <TextBlock Text="*Betafast does not guarantee competitive prices"
+                       Grid.Row="2"
+                       Grid.Column="0"
+                       Margin="40,0,0,10"
+                       TextWrapping="Wrap"
+                       Width="800"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Bottom"
+                       FontSize="12">
+            </TextBlock>
+        </Grid>
+    </Grid>
+</UserControl>

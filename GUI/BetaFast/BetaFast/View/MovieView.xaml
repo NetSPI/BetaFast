@@ -1,0 +1,135 @@
+﻿<UserControl x:Class="BetaFast.View.MovieView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:BetaFast.View"
+             xmlns:controls="clr-namespace:BetaFast.View.Controls"
+             Background="Silver"
+             mc:Ignorable="d"
+             d:DesignHeight="750"
+             d:DesignWidth="1200"
+             MinHeight="750"
+             MinWidth="1200">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="80" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Border Grid.Row="0"
+                BorderBrush="Black"
+                BorderThickness="0 0 0 2">
+            <Grid Grid.Row="0"
+                  Background="{StaticResource BetaFastDark}">
+
+                <controls:NavigationBar />
+
+                <!-- Title -->
+                <TextBlock Margin="0,10,0,0"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           FontSize="40"
+                           Foreground="White"
+                           TextTrimming="CharacterEllipsis"
+                           Text="{Binding Title}" />
+            </Grid>
+        </Border>
+
+        <Grid Grid.Row="1"
+              HorizontalAlignment="Stretch"
+              VerticalAlignment="Stretch"
+              Margin="60,60,60,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"
+                               MinHeight="500"/>
+                <RowDefinition Height="0.125*"
+                               MinHeight="80"/>
+            </Grid.RowDefinitions>
+
+            <!-- Movie Thumbnail -->
+            <Image x:Name="MoviePoster"
+                   Margin="0,0,100,0"
+                   Grid.Column="0"
+                   Grid.Row="0"
+                   Source="{Binding Poster}"
+                   HorizontalAlignment="Right"
+                   VerticalAlignment="Center"
+                   MaxHeight="700"
+                   MaxWidth="500" />
+
+            <ScrollViewer HorizontalScrollBarVisibility="Disabled"
+                          VerticalScrollBarVisibility="Auto"
+                          Grid.Column="1"
+                          Margin="100,0,0,0"
+                          VerticalAlignment="Center"
+                          HorizontalAlignment="Left"
+                          MinWidth="333"
+                          MaxHeight="700"
+                          MaxWidth="700"
+                          Background="Silver">
+
+                <Border BorderBrush="Black"
+                        BorderThickness="0">
+                    <StackPanel VerticalAlignment="Center"
+                                HorizontalAlignment="Center"
+                                Margin="10,10,10,10">
+
+                        <!-- Description -->
+                        <TextBlock HorizontalAlignment="Center"
+                                   VerticalAlignment="Top"
+                                   TextWrapping="Wrap"
+                                   FontSize="24"
+                                   Text="{Binding Description}" />
+
+                        <!-- Director -->
+                        <TextBlock Margin="0,15,0,0"
+                                   HorizontalAlignment="Left"
+                                   VerticalAlignment="Top"
+                                   FontSize="24"
+                                   Text="{Binding Director}" />
+
+                        <!-- Year -->
+                        <TextBlock Margin="0,15,0,0"
+                                   HorizontalAlignment="Left"
+                                   VerticalAlignment="Top"
+                                   FontSize="24"
+                                   Text="{Binding Year}" />
+
+                        <!-- Price -->
+                        <TextBlock Margin="0,15,0,0"
+                                   HorizontalAlignment="Left"
+                                   VerticalAlignment="Top"
+                                   FontSize="24"
+                                   Text="{Binding Price}" />
+                    </StackPanel>
+                </Border>
+            </ScrollViewer>
+
+            <!-- Rent Button -->
+            <Button x:Name="RentButton"
+                    Grid.Column="1"
+                    Grid.Row="1"
+                    Margin="0,0,20,20"
+                    Command="{Binding Rent}"
+                    Width="60"
+                    Height="30"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Bottom"
+                    Background="{StaticResource BetaFastLight}"
+                    FontSize="16"
+                    Content="Rent"
+                    HorizontalContentAlignment="Center"
+                    VerticalContentAlignment="Center"
+                    Foreground="White" />
+        </Grid>
+    </Grid>
+</UserControl>

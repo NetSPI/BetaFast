@@ -1,0 +1,49 @@
+﻿<Application x:Class="BetaFast.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:BetaFast"
+             xmlns:View="clr-namespace:BetaFast.View"
+             xmlns:ViewModel="clr-namespace:BetaFast.ViewModel"
+             StartupUri="View/MainWindow.xaml">
+    <Application.Resources>
+        <ViewModel:MainViewModel x:Key="MainViewModel" />
+        <DataTemplate DataType="{x:Type ViewModel:LoginViewModel}">
+            <View:LoginForm />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type ViewModel:RegisterViewModel}">
+            <View:Register />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type ViewModel:MovieViewModel}">
+            <View:MovieView />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type ViewModel:PaymentViewModel}">
+            <View:PaymentView />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type ViewModel:AboutUsViewModel}">
+            <View:AboutUs />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type ViewModel:UserManagementViewModel}">
+            <View:UserManagementView />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type ViewModel:MovieManagementViewModel}">
+            <View:MovieManagementView />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type ViewModel:HomeViewModel}">
+            <View:HomeView />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type ViewModel:SettingsViewModel}">
+            <View:SettingsView />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type ViewModel:ShoppingCartViewModel}">
+            <View:ShoppingCartView />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type ViewModel:PaymentConfirmationViewModel}">
+            <View:PaymentConfirmationView />
+        </DataTemplate>
+
+        <BitmapImage x:Key="BetaFastLogo1"
+                     UriSource="/Images/logo_name.png" />
+        <SolidColorBrush x:Key="BetaFastDark">#475870</SolidColorBrush>
+        <SolidColorBrush x:Key="BetaFastLight">#a5a18d</SolidColorBrush>
+    </Application.Resources>
+</Application>

@@ -1,0 +1,421 @@
+﻿<UserControl x:Class="BetaFast.View.MovieManagementView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:BetaFast.View"
+             xmlns:controls="clr-namespace:BetaFast.View.Controls"
+             xmlns:properties="clr-namespace:BetaFast.ViewProperties"
+             Background="Silver"
+             mc:Ignorable="d"
+             d:DesignHeight="750"
+             d:DesignWidth="1200"
+             MinHeight="750"
+             MinWidth="1200">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="80" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Border Grid.Row="0"
+                BorderBrush="Black"
+                BorderThickness="0 0 0 2">
+            <Grid Grid.Row="0"
+                  Background="{StaticResource BetaFastDark}">
+
+                <controls:NavigationBar />
+
+                <!-- Title -->
+                <TextBlock Text="Movie Management"
+                           Grid.Row="0"
+                           Grid.Column="0"
+                           Margin="100,10,0,0"
+                           TextWrapping="Wrap"
+                           Width="700"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Top"
+                           FontSize="40"
+                           Foreground="White">
+                </TextBlock>
+            </Grid>
+        </Border>
+
+        <Grid Grid.Row="1"
+              HorizontalAlignment="Stretch"
+              VerticalAlignment="Top"
+              Margin="0,0,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="40" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0"
+                  HorizontalAlignment="Center"
+                  VerticalAlignment="Center"
+                  Margin="0,0,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="3*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+                <!-- Movie List -->
+                <ListView Grid.Row="0"
+                          Grid.Column="0"
+                          Grid.ColumnSpan="1"
+                          VerticalAlignment="Center"
+                          HorizontalAlignment="Center"
+                          Margin="0,30,30,30"
+                          ScrollViewer.VerticalScrollBarVisibility="Visible"
+                          ScrollViewer.HorizontalScrollBarVisibility="Auto"
+                          ItemsSource="{Binding MoviesList}"
+                          Height="250"
+                          Width="auto"
+                          SelectedItem="{Binding SelectedMovie}">
+                    <ListView.Resources>
+                        <Style x:Key="CellStyle"
+                               TargetType="TextBlock">
+                            <Setter Property="HorizontalAlignment"
+                                    Value="Center" />
+                            <Setter Property="FontSize"
+                                    Value="16" />
+                        </Style>
+                    </ListView.Resources>
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="ListViewItem">
+                            <Setter Property="HorizontalContentAlignment"
+                                    Value="Stretch" />
+                        </Style>
+                    </ListView.ItemContainerStyle>
+                    <ListView.View>
+                        <GridView AllowsColumnReorder="false">
+                            <GridView.ColumnHeaderContainerStyle>
+                                <Style>
+                                    <Setter Property="TextElement.FontSize"
+                                            Value="20" />
+                                </Style>
+                            </GridView.ColumnHeaderContainerStyle>
+                            <GridViewColumn Header="Title"
+                                            Width="250">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Title}"
+                                                   Style="{StaticResource CellStyle}"
+                                                   TextAlignment="Center" />
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                            <GridViewColumn Header="Director"
+                                            Width="250">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Director}"
+                                                   Style="{StaticResource CellStyle}"
+                                                   TextAlignment="Center" />
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                            <GridViewColumn Header="Year"
+                                            Width="100">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Year}"
+                                                   Style="{StaticResource CellStyle}"
+                                                   TextAlignment="Center" />
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                            <GridViewColumn Header="Price"
+                                            Width="100">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Price}"
+                                                   Style="{StaticResource CellStyle}"
+                                                   TextAlignment="Center" />
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+
+                <!-- Add Button -->
+                <Button x:Name="AddButton"
+                        Grid.Column="1"
+                        Grid.Row="0"
+                        Margin="40,0,0,120"
+                        Command="{Binding Add}"
+                        Width="80"
+                        Height="40"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Background="{StaticResource BetaFastLight}"
+                        FontSize="20"
+                        Content="+ Add"
+                        HorizontalContentAlignment="Center"
+                        VerticalContentAlignment="Center"
+                        Foreground="White" />
+
+                <!-- Delete Button -->
+                <Button x:Name="DeleteButton"
+                        Grid.Column="1"
+                        Grid.Row="0"
+                        Margin="40,0,0,0"
+                        Command="{Binding Delete}"
+                        Width="80"
+                        Height="40"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Background="{StaticResource BetaFastLight}"
+                        FontSize="20"
+                        Content="- Delete"
+                        HorizontalContentAlignment="Center"
+                        VerticalContentAlignment="Center"
+                        Foreground="White" />
+
+                <Button x:Name="RefreshButton"
+                        Grid.Column="1"
+                        Grid.Row="0"
+                        Margin="40,120,0,0"
+                        Command="{Binding Refresh}"
+                        Width="40"
+                        Height="40"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Background="{StaticResource BetaFastLight}"
+                        FontFamily="Segoe MDL2 Assets"
+                        FontSize="16"
+                        Content="&#xE72C;"
+                        Foreground="White"
+                        HorizontalContentAlignment="Center"
+                        VerticalContentAlignment="Center" />
+            </Grid>
+
+            <!-- Message -->
+            <TextBlock Text="{Binding Message}"
+                       Grid.Row="1"
+                       Grid.Column="0"
+                       Margin="0,0,0,0"
+                       TextWrapping="NoWrap"
+                       Width="900"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"
+                       TextAlignment="Center"
+                       FontSize="24"
+                       Foreground="{Binding MessageColor}">
+            </TextBlock>
+
+            <Grid Grid.Row="2"
+                  HorizontalAlignment="Center"
+                  VerticalAlignment="Top"
+                  Margin="0,0,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"
+                                      MinWidth="400"/>
+                    <ColumnDefinition Width="*"
+                                      MinWidth="400"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" 
+                                   MinHeight="100"/>
+                    <RowDefinition Height="*"
+                                   MinHeight="100"/>
+                    <RowDefinition Height="*"
+                                   MinHeight="100" />
+                </Grid.RowDefinitions>
+                <!-- Form -->
+
+                <Grid Grid.Row="2"
+                      Grid.Column="0"
+                      HorizontalAlignment="Center"
+                      VerticalAlignment="Center"
+                      Margin="0,0,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="150" />
+                        <ColumnDefinition Width="150" />
+                        <ColumnDefinition Width="150" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <!-- Year -->
+                    <TextBlock Text="Year"
+                               Grid.Row="0"
+                               Grid.Column="1"
+                               Margin="0,0,0,50"
+                               TextWrapping="Wrap"
+                               Width="300"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               TextAlignment="Center"
+                               FontSize="24">
+                    </TextBlock>
+                    <TextBox x:Name="YearTextBox"
+                             Grid.Row="0"
+                             Grid.Column="1"
+                             Text="{Binding Year}"
+                             Margin="0,20,0,10"
+                             Width="100"
+                             Height="32"
+                             FontSize="20"
+                             MaxLength="4"
+                             HorizontalAlignment="Center"
+                             VerticalAlignment="Center">
+                    </TextBox>
+
+                    <!-- Upload Poster -->
+                    <TextBlock Text="Poster"
+                               Grid.Row="0"
+                               Grid.Column="0"
+                               Margin="0,0,0,50"
+                               TextWrapping="NoWrap"
+                               Width="300"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               TextAlignment="Center"
+                               FontSize="24">
+                    </TextBlock>
+                    <Button x:Name="UploadButton"
+                            Grid.Row="0"
+                            Grid.Column="0"
+                            Content="Browse"
+                            Command="{Binding Browse}"
+                            Margin="0,20,0,10"
+                            Width="70"
+                            Height="25"
+                            FontSize="16"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center">
+                    </Button>
+                    <TextBlock Text="{Binding FileMessage}"
+                               Foreground="{Binding FileMessageColor}"
+                               Grid.Row="0"
+                               Grid.Column="0"
+                               Margin="0,70,0,0"
+                               TextWrapping="NoWrap"
+                               Width="300"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               TextAlignment="Center"
+                               FontSize="16">
+                    </TextBlock>
+                    
+                    <!-- Price -->
+                    <TextBlock Text="Price"
+                               Grid.Row="0"
+                               Grid.Column="2"
+                               Margin="0,0,0,50"
+                               TextWrapping="Wrap"
+                               Width="300"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               TextAlignment="Center"
+                               FontSize="24">
+                    </TextBlock>
+                    <TextBox x:Name="PriceTextBox"
+                             Grid.Row="0"
+                             Grid.Column="2"
+                             Text="{Binding Price}"
+                             Margin="0,20,0,10"
+                             Width="100"
+                             Height="32"
+                             FontSize="20"
+                             MaxLength="4"
+                             HorizontalAlignment="Center"
+                             VerticalAlignment="Center">
+                    </TextBox>
+                </Grid>
+
+                <!-- Description -->
+                <TextBlock Text="Description"
+                           Grid.Row="0"
+                           Grid.Column="1"
+                           Margin="0,10,0,0"
+                           TextWrapping="Wrap"
+                           Width="300"
+                           HorizontalAlignment="Right"
+                           TextAlignment="Right"
+                           FontSize="24">
+                </TextBlock>
+                <ScrollViewer Grid.Row="0"
+                              Grid.Column="1"
+                              Grid.RowSpan="3"
+                              Margin="0,50,0,20"
+                              HorizontalAlignment="Right"
+                              VerticalAlignment="Top"
+                              Height="225">
+                    <TextBox x:Name="DescriptionTextBox"
+                             TextWrapping="Wrap"
+                             Text="{Binding Description}"
+                             Margin="0,0,0,0"
+                             Width="400"
+                             FontSize="20"
+                             MaxLength="2000"
+                             HorizontalAlignment="Right">
+                    </TextBox>
+                </ScrollViewer>
+
+                <!-- Director -->
+                <TextBlock Text="Director"
+                           Grid.Row="1"
+                           Grid.Column="0"
+                           Margin="0,0,0,50"
+                           TextWrapping="NoWrap"
+                           Width="300"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           TextAlignment="Left"
+                           FontSize="24">
+                </TextBlock>
+                <TextBox x:Name="DirectorTextBox"
+                         Grid.Row="1"
+                         Grid.Column="0"
+                         Text="{Binding Director}"
+                         Margin="0,20,0,10"
+                         Width="300"
+                         Height="32"
+                         FontSize="20"
+                         MaxLength="24"
+                         HorizontalAlignment="Center"
+                         VerticalAlignment="Center">
+                </TextBox>
+
+                <!-- Title -->
+                <TextBlock Text="Title"
+                           Grid.Row="0"
+                           Grid.Column="0"
+                           Margin="0,0,0,50"
+                           TextWrapping="Wrap"
+                           Width="300"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           TextAlignment="Left"
+                           FontSize="24">
+                </TextBlock>
+                <TextBox x:Name="TitleTextBox"
+                         Grid.Row="0"
+                         Grid.Column="0"
+                         Text="{Binding Title}"
+                         Margin="0,20,0,10"
+                         Width="300"
+                         Height="32"
+                         FontSize="20"
+                         MaxLength="24"
+                         HorizontalAlignment="Center"
+                         VerticalAlignment="Center">
+                </TextBox>
+            </Grid>
+        </Grid>
+    </Grid>
+</UserControl>

@@ -1,0 +1,132 @@
+﻿<UserControl x:Class="BetaFast.View.HomeView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:BetaFast.View"
+             xmlns:controls="clr-namespace:BetaFast.View.Controls"
+             xmlns:properties="clr-namespace:BetaFast.ViewProperties"
+             Background="Silver"
+             mc:Ignorable="d"
+             d:DesignHeight="750"
+             d:DesignWidth="1200"
+             MinHeight="750"
+             MinWidth="1200">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="80" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Border Grid.Row="0"
+                BorderBrush="Black"
+                BorderThickness="0 0 0 2">
+            <Grid Grid.Row="0"
+                  Background="{StaticResource BetaFastDark}">
+
+                <controls:NavigationBar />
+                
+                <!-- Logo Button -->
+                <Button x:Name="AboutUsButton"
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        Command="{Binding AboutUs}"
+                        Margin="10,0,0,0"
+                        Width="60"
+                        Height="60"
+                        Background="{StaticResource BetaFastDark}"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Center">
+                    <Image Margin="0,0,0,0"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Center"
+                           Source="/Images/logo_icon.ico" />
+                </Button>
+
+                <!-- Search Box -->
+                <TextBox x:Name="UsernameTextbox"
+                         Grid.Row="0"
+                         Grid.Column="0"
+                         Margin="150,0,0,0"
+                         Text="{Binding SearchText}"
+                         Width="450"
+                         Height="32"
+                         FontSize="20"
+                         MaxLength="300"
+                         HorizontalAlignment="Left"
+                         VerticalAlignment="Center">
+                </TextBox>
+
+                <!-- Search Button -->
+                <Button x:Name="SearchButton"
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        Command="{Binding Search}"
+                        Margin="600,0,0,0"
+                        Width="60"
+                        Height="32"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Center"
+                        Background="{StaticResource BetaFastLight}"
+                        FontFamily="Segoe MDL2 Assets"
+                        FontSize="16"
+                        Content="&#xE721;"
+                        Foreground="White" />
+            </Grid>
+        </Border>
+
+        <Grid Grid.Row="1"
+              HorizontalAlignment="Stretch"
+              VerticalAlignment="Top"
+              Margin="0,0,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <ListView x:Name="MovieList"
+                      Margin="10,10,10,10"
+                      HorizontalAlignment="Stretch"
+                      VerticalAlignment="Top"
+                      ScrollViewer.VerticalScrollBarVisibility="Auto"
+                      ScrollViewer.HorizontalScrollBarVisibility="Auto"
+                      ItemsSource="{Binding VisibleMoviesList}"
+                      Height="auto"
+                      Width="auto"
+                      SelectedItem="{Binding SelectedMovie}"
+                      Background="Silver">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <UniformGrid Columns="4"
+                                     HorizontalAlignment="Center" />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Vertical"
+                                    VerticalAlignment="Stretch"
+                                    HorizontalAlignment="Center">
+                            <Image Source="{Binding Poster.Image}"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Top"
+                                   Height="450"
+                                   Width="300"/>
+                            <TextBlock Text="{Binding Title}"
+                                       HorizontalAlignment="Center"
+                                       VerticalAlignment="Bottom"
+                                       FontSize="18"
+                                       TextWrapping="NoWrap"
+                                       MaxWidth="300"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Grid>
+    </Grid>
+</UserControl>

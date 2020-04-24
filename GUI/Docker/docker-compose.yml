@@ -1,0 +1,19 @@
+version: "3"
+services:
+    vuln-db:
+        build: ./db
+        environment:
+            SA_PASSWORD: "Password123"
+            ACCEPT_EULA: "Y"
+            MSSQL_AGENT_ENABLED: "true"
+        ports:
+            - "1433:1433"
+        container_name: vuln-db
+        hostname: vuln-db
+    web:
+        build: ./web
+        depends_on:
+            - vuln-db
+        ports:
+            - "8080:80"
+            - "443:443"
