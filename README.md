@@ -1,3 +1,4 @@
+![Image of BetaFast](https://github.com/NetSPI/BetaFastExamples/blob/master/GUI/BetaFast/BetaFast/Images/logo_name.png)
 # BetaFast
 ## The Company
 BetaFast is the provider of a premier Betamax rental kiosk. Browse the wide selection of movies and begin renting today!
