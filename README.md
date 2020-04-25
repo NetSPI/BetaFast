@@ -3,7 +3,10 @@
 ## The Company
 BetaFast is the provider of a premier Betamax rental kiosk. Browse the wide selection of movies and begin renting today!
 
-## Using The Application
+## The Client
+To use the client, open the BetaFast solution in visual studio and compile the source code.
+
+## The Server
 Ensure that Docker is installed and that there are no conflicts with Hyper-V. Docker files can be edited to configure the database credentials, database server address and port, and the web server address and port. **Do not modify db-init.sql table formats unless you're prepared to modify how the API works.**
 
 Docker should be configured to have a good amount of RAM and other settings. If it and the host machine lack the resources to serve data quickly, there will be weird timeouts in the client. A lot of large images are retrieved on initial login. If there are issues creating the container and connecting with sa, increase the sleep command time in db-init.sh.
