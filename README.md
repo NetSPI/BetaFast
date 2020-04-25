@@ -5,7 +5,7 @@ BetaFast is the provider of a premier Betamax rental kiosk. Browse the wide sele
 
 ## Releases
 The following versions of BetaFast have been released in conjunction with our blog series Introduction to Hacking Thick Clients:
-* GUI - [Blog URL]
+* The GUI - https://blog.netspi.com/introduction-to-hacking-thick-clients-part-1
 
 ## The Client
 To use the client, open the BetaFast solution in visual studio and compile the source code.
