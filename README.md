@@ -3,6 +3,10 @@
 ## The Company
 BetaFast is the provider of a premier Betamax rental kiosk. Browse the wide selection of movies and begin renting today!
 
+## Releases
+The following versions of BetaFast have been released in conjunction with our blog series Introduction to Hacking Thick Clients:
+* GUI - [Blog URL]
+
 ## The Client
 To use the client, open the BetaFast solution in visual studio and compile the source code.
 
