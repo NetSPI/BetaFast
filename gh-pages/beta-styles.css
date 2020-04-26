@@ -1,0 +1,234 @@
+
+body {
+	background-image: url("images/background.png");
+	background-repeat: repeat;
+	background-size: 20vh;
+	margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    min-height: 100%;
+    width: 100%;
+}
+
+.navigation {
+	margin-top: 2vh;
+  	margin-left: auto;
+  	margin-right: auto;
+    display: flex;
+    justify-content: center;
+  	align-items: center;
+  	max-width: 60%;
+}
+
+.navigation-button {
+	margin: 2vh;
+	font-size: 3vh;
+  font-family: Comic Sans MS, Comic Sans;
+	outline: 0.5vh solid DimGray;
+	background-color: LightGray;
+	white-space: nowrap;
+}
+
+a:hover {
+  background-color: yellow;
+}
+
+.audio-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.logo-container {
+  margin-top: 2vh;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: LightGray;
+  border: 1vh solid DimGray;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 60%;
+}
+
+.announcement-container {
+  font-family: Comic Sans MS, Comic Sans;
+  font-size: 4vh;
+  text-align: center;
+}
+
+.announcement-container p {
+	margin: 0 auto;
+ 	text-align: center;
+ 	white-space: nowrap;
+}
+
+#announcement1 {
+  margin-top: 2vh;
+  animation-name: announcement-flash-1;
+  animation-duration: 4s;
+  animation-iteration-count:infinite;
+  color: white;
+  background-color: LightGray;
+  border: 1vh solid DimGray;
+  max-width: 40%;
+}
+
+#announcement2 {
+  margin-top: 2vh;
+  animation-name: announcement-flash-2;
+  animation-duration: 2s;
+  animation-iteration-count:infinite;
+  color: white;
+  background-color: LightGray;
+  border: 1vh solid DimGray;
+  max-width: 40%;
+}
+
+@keyframes announcement-flash-1 {
+  0%   {color: white;}
+  25%  {color: blue;}
+  50%  {color: white;}
+  75%  {color: blue;}
+  100% {color: white;}
+}
+
+@keyframes announcement-flash-2 {
+  0%   {color: yellow;}
+  25%  {color: white;}
+  50%  {color: yellow;}
+  75%  {color: white;}
+  100% {color: yellow;}
+}
+
+#greeting {
+	background-color: #a5a18d;
+}
+
+#the-company {
+
+}
+
+#contact-us {
+	background-color: LightGray;
+}
+
+#contact-us-text {
+	font-size: 8vh;
+	margin-bottom: 20vh;
+	font-family: Comic Sans MS, Comic Sans;
+	color: red;
+	text-align: center;
+}
+
+.contact-information {
+	margin-top: 2vh;
+  	margin-left: auto;
+  	margin-right: auto;
+  	background-color: black;
+  	border: 1vh solid DimGray;
+  	display: flex;
+  	justify-content: center;
+  	align-items: center;
+  	max-width: 60%;
+}
+
+.contact-information p {
+	font-size: 3vh;
+	margin: 1vh;
+	font-family: Comic Sans MS, Comic Sans;
+	color: white;
+}
+
+
+.company-description {
+	margin-top: 2vh;
+  	margin-left: auto;
+  	margin-right: auto;
+  	background-color: LightGray;
+  	border: 1vh solid DimGray;
+  	display: flex;
+  	justify-content: center;
+  	align-items: center;
+  	max-width: 60%;
+}
+
+.company-description p {
+	font-size: 3vh;
+	margin: 1vh;
+	font-family: Comic Sans MS, Comic Sans;
+}
+
+.company-description img {
+  max-height: 60vh;
+}
+
+.movie-text {
+	display: inline-block;
+  	text-align: center;
+}
+
+.movie-display {
+	margin-top: 2vh;
+  	margin-left: auto;
+  	margin-right: auto;
+  	background-color: LightGray;
+  	border: 1vh solid DimGray;
+  	display: flex;
+  	justify-content: center;
+  	align-items: center;
+  	max-width: 60%;
+}
+
+.movie-display img {
+	max-height: 60vh;
+}
+
+.movie-display #caption {
+	font-size: 4vh;
+	margin: 1vh;
+	font-family: Comic Sans MS, Comic Sans;
+}
+
+.movie-display #description {
+	font-size: 3vh;
+	margin: 1vh;
+	font-family: Comic Sans MS, Comic Sans;
+}
+
+#new-arrival {
+	background-color: black;
+}
+
+.page {
+    display: block;
+    vertical-align: top;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+section {
+	height: 100vh;
+	max-height: 100%;
+	display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    justify-content: center;
+}
+
+.page, section {
+    position: relative;
+    width: 100%;
+}
+
+.main-content {
+}
+
+#logo {
+	height: 100%;
+	width: 100%;
+	object-fit: contain
+}
