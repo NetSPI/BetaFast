@@ -1,11 +1,26 @@
-![Image of BetaFast](https://github.com/NetSPI/BetaFastExamples/blob/master/GUI/BetaFast/BetaFast/Images/logo_name.png)
+![Image of BetaFast](https://github.com/NetSPI/BetaFast/blob/master/docs/images/betafast-logo.png)
 # BetaFast
 ## The Company
 BetaFast is the provider of a premier Betamax rental kiosk. Browse the wide selection of movies and begin renting today!
 
 ## Releases
-The following versions of BetaFast have been released in conjunction with our blog series Introduction to Hacking Thick Clients:
-* The GUI - https://blog.netspi.com/introduction-to-hacking-thick-clients-part-1
+Two versions of BetaFast have been released. One is written with three-tier architecture, the other two-tier architecture. Both releases contains but is not limited to the following vulnerabilities:
+* Hardcoded Encryption Data
+* Hardcoded Encrypted Password
+* SQL Injection
+* Authorization Bypass
+* Missing server-side input validation
+* Cleartext Password Stored - Registry
+* Cleartext Sensitive Data Stored - Files
+* Weak File Upload Controls
+* Weak Input Validation
+* No Code Obfuscation
+
+The two-tier release contains but is not limited to the following additional vulnerabilities:
+* Unencrypted Database Connection
+* Hardcoded Connection String
+
+BetaFast was developed in conjunction with our blog series Introduction to Hacking Thick Clients. An overview and further instructions can be found at https://blog.netspi.com/introducing-betafast/.
 
 ## The Client
 To use the client, open the BetaFast solution in visual studio and compile the source code.
