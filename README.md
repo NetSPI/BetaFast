@@ -23,7 +23,7 @@ The two-tier release contains but is not limited to the following additional vul
 BetaFast was developed in conjunction with our blog series Introduction to Hacking Thick Clients. An overview and further instructions can be found at https://blog.netspi.com/introducing-betafast/.
 
 ## The Client
-To use the client, open the BetaFast solution in visual studio and compile the source code.
+To use the client, open the BetaFast solution in visual studio and compile the source code. The solution uses .Net Framework 4.6.1.
 
 ## The Server
 Ensure that Docker is installed and that there are no conflicts with Hyper-V. Docker files can be edited to configure the database credentials, database server address and port, and the web server address and port. **Do not modify db-init.sql table formats unless you're prepared to modify how the API works.**
