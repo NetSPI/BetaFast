@@ -200,31 +200,9 @@
                             HorizontalAlignment="Center"
                             VerticalAlignment="Center"
                             Margin="0,0,0,0">
-                    <TextBlock Text="Enter the CVC of your saved credit card"
-                               Margin="0,0,10,0"
-                               Grid.Row="2"
-                               Grid.Column="0"
-                               TextWrapping="Wrap"
-                               Width="400"
-                               TextAlignment="Center"
-                               HorizontalAlignment="Center"
-                               VerticalAlignment="Center"
-                               FontSize="18">
-                    </TextBlock>
                     <StackPanel Orientation="Horizontal"
                                 HorizontalAlignment="Center"
                                 VerticalAlignment="Center">
-                        <TextBox x:Name="passwordBox"
-                                 Grid.Row="2"
-                                 Grid.Column="0"
-                                 Text="{Binding Password}"
-                                 Margin="0,0,0,0"
-                                 Width="50"
-                                 Height="30"
-                                 FontSize="18"
-                                 MaxLength="4"
-                                 HorizontalAlignment="Center">
-                        </TextBox>
                         <!-- Load Payment Details -->
                         <Button x:Name="LoadPaymentButton"
                                 Command="{Binding Load}"
@@ -238,7 +216,7 @@
                                 Content="Load Payment Details"
                                 HorizontalContentAlignment="Center"
                                 VerticalContentAlignment="Center"
-                                Margin="30,0,0,0" />
+                                Margin="0,0,0,0" />
                     </StackPanel>
                 </StackPanel>
 

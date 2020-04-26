@@ -13,7 +13,7 @@ CREATE TABLE USERS (
     [Active] [bit] NOT NULL 
 );
 GO
-INSERT INTO USERS (UserID, LastName, FirstName, Username, Password, Salt, Role, Active) VALUES (0,'Fast','Beta','movieguy45','nRFosQ==','aFSYzZBF9Lti3lS/fJ+ugw==',0,1);
+INSERT INTO USERS (UserID, LastName, FirstName, Username, Password, Salt, Role, Active) VALUES (0,'Fast','Beta','betafastadmin','XO8rLA==','WPluNqy1GezMhAektWWuPg==',0,1);
 GO
 CREATE TABLE MOVIES (
     [Title] [varchar](255) NOT NULL,

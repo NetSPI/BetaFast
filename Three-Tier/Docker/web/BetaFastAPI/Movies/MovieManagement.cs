@@ -25,16 +25,11 @@ namespace BetaFastAPI.Movies
         }
         public Movie GetMovieByTitle(string title)
         {
-            string commandText = "SELECT * FROM " + _moviesTableName + " WHERE Title = @title";
-            SqlParameter param = new SqlParameter
-            {
-                ParameterName = "@title",
-                Value = title
-            };
+            string commandText = "SELECT * FROM " + _moviesTableName + " WHERE Title = '" + title + "';";
 
             try
             {
-                using (DataTable contents = DatabaseUtility.QueryDatabase(_connectionString, commandText, param))
+                using (DataTable contents = DatabaseUtility.QueryDatabase(_connectionString, commandText))
                 {
                     if (contents != null && contents.Rows.Count > 0)
                     {
@@ -100,16 +95,11 @@ namespace BetaFastAPI.Movies
 
         private bool MovieExists(string title)
         {
-            string commandText = "SELECT 1 FROM " + _moviesTableName + " WHERE Title = @title";
-            SqlParameter param = new SqlParameter
-            {
-                ParameterName = "@title",
-                Value = title
-            };
+            string commandText = "SELECT 1 FROM " + _moviesTableName + " WHERE Title = '" + title + "';";
 
             try
             {
-                using (DataTable contents = DatabaseUtility.QueryDatabase(_connectionString, commandText, param))
+                using (DataTable contents = DatabaseUtility.QueryDatabase(_connectionString, commandText))
                 {
                     if (contents.Rows.Count == 0)
                     {
@@ -129,16 +119,11 @@ namespace BetaFastAPI.Movies
 
         private bool MovieFileExists(string file)
         {
-            string commandText = "SELECT 1 FROM " + _moviesTableName + " WHERE PosterFile = @file";
-            SqlParameter param = new SqlParameter
-            {
-                ParameterName = "@file",
-                Value = file
-            };
+            string commandText = "SELECT 1 FROM " + _moviesTableName + " WHERE PosterFile = '" + file + "';";
 
             try
             {
-                using (DataTable contents = DatabaseUtility.QueryDatabase(_connectionString, commandText, param))
+                using (DataTable contents = DatabaseUtility.QueryDatabase(_connectionString, commandText))
                 {
                     if (contents.Rows.Count == 0)
                     {
@@ -200,17 +185,7 @@ namespace BetaFastAPI.Movies
                 throw new MovieExistsException("Poster with the name " + poster + " already exists");
             }
 
-            string commandText = "INSERT INTO " + _moviesTableName + " (Title, Description, Director, Year, Price, PosterFile) VALUES (@title,@description,@director,@year,@price,@poster)";
-
-            List<SqlParameter> parameters = new List<SqlParameter>()
-            {
-                 new SqlParameter("@title", SqlDbType.VarChar) {Value = title},
-                 new SqlParameter("@description", SqlDbType.VarChar) {Value = description},
-                 new SqlParameter("@director", SqlDbType.VarChar) {Value = director},
-                 new SqlParameter("@year", SqlDbType.Int) {Value = year},
-                 new SqlParameter("@price", SqlDbType.Decimal) {Value = price},
-                 new SqlParameter("@poster", SqlDbType.VarChar) {Value = poster}
-            };
+            string commandText = "INSERT INTO " + _moviesTableName + " (Title, Description, Director, Year, Price, PosterFile) VALUES ('" + title + "','" + description + "','" + director + "'," + year + "," + price + ",'" + poster + "')";
 
             try
             {
@@ -221,7 +196,7 @@ namespace BetaFastAPI.Movies
                     throw new InvalidFileException();
                 }
 
-                DatabaseUtility.ModifyDatabase(_connectionString, commandText, parameters);
+                DatabaseUtility.ModifyDatabase(_connectionString, commandText);
 
                 try
                 {
@@ -275,17 +250,11 @@ namespace BetaFastAPI.Movies
             }
 
             // Delete from Movies table
-            string commandText = "DELETE FROM " + _moviesTableName + " WHERE Title = @title;";
-
-            SqlParameter param = new SqlParameter
-            {
-                ParameterName = "@title",
-                Value = title
-            };
+            string commandText = "DELETE FROM " + _moviesTableName + " WHERE Title = '" + title + "';";
 
             try
             {
-                DatabaseUtility.ModifyDatabase(_connectionString, commandText, param);
+                DatabaseUtility.ModifyDatabase(_connectionString, commandText);
             }
             catch (ServerUnavailableException e)
             {
@@ -293,17 +262,11 @@ namespace BetaFastAPI.Movies
             }
 
             // Delete from Rental table
-            string commandText2 = "DELETE FROM " + _rentalTableName + " WHERE Title = @title;";
-
-            SqlParameter param2 = new SqlParameter
-            {
-                ParameterName = "@title",
-                Value = title
-            };
+            string commandText2 = "DELETE FROM " + _rentalTableName + " WHERE Title = '" + title + "';";
 
             try
             {
-                DatabaseUtility.ModifyDatabase(_connectionString, commandText2, param2);
+                DatabaseUtility.ModifyDatabase(_connectionString, commandText2);
             }
             catch (ServerUnavailableException e)
             {
@@ -313,16 +276,11 @@ namespace BetaFastAPI.Movies
 
         private bool MultipleMoviesUsePoster(string fileName)
         {
-            string commandText = "SELECT * FROM " + _moviesTableName + " WHERE PosterFile = @file";
-            SqlParameter param = new SqlParameter
-            {
-                ParameterName = "@file",
-                Value = fileName
-            };
+            string commandText = "SELECT * FROM " + _moviesTableName + " WHERE PosterFile = '" + fileName + "';";
 
             try
             {
-                using (DataTable contents = DatabaseUtility.QueryDatabase(_connectionString, commandText, param))
+                using (DataTable contents = DatabaseUtility.QueryDatabase(_connectionString, commandText))
                 {
                     if (contents.Rows.Count > 1)
                     {

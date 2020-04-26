@@ -24,16 +24,11 @@ namespace BetaFastAPI.Rentals
             if (string.IsNullOrEmpty(title))
                 throw new ArgumentNullException("Title");
 
-            string commandText = "SELECT 1 FROM " + _rentalTableName + " WHERE Username = @username AND Title = @title";
-            List<SqlParameter> parameters = new List<SqlParameter>()
-            {
-                 new SqlParameter("@username", SqlDbType.VarChar) {Value = username},
-                 new SqlParameter("@title", SqlDbType.VarChar) {Value = title}
-            };
+            string commandText = "SELECT 1 FROM " + _rentalTableName + " WHERE Username = '" + username + "' AND Title = '" + title + "';";
 
             try
             {
-                using (DataTable contents = DatabaseUtility.QueryDatabase(_connectionString, commandText, parameters))
+                using (DataTable contents = DatabaseUtility.QueryDatabase(_connectionString, commandText))
                 {
                     if (contents.Rows.Count == 0)
                     {
@@ -53,16 +48,11 @@ namespace BetaFastAPI.Rentals
 
         public List<Rental> GetCart(string username)
         {
-            string commandText = "SELECT * FROM " + _rentalTableName + " WHERE Username = @username";
-            SqlParameter param = new SqlParameter
-            {
-                ParameterName = "@username",
-                Value = username
-            };
+            string commandText = "SELECT * FROM " + _rentalTableName + " WHERE Username = '" + username + "';";
 
             try
             {
-                using (DataTable contents = DatabaseUtility.QueryDatabase(_connectionString, commandText, param))
+                using (DataTable contents = DatabaseUtility.QueryDatabase(_connectionString, commandText))
                 {
                     if (contents != null && contents.Rows.Count > 0)
                     {
@@ -122,30 +112,15 @@ namespace BetaFastAPI.Rentals
                 {
                     if (RentalExists(username, title))
                     {
-                        string commandText = "UPDATE " + _rentalTableName + " SET Quantity = Quantity + @quantity WHERE Username = @username AND Title = @title;";
+                        string commandText = "UPDATE " + _rentalTableName + " SET Quantity = Quantity + " + quantity + " WHERE Username = '" + username + "' AND Title = '" + title + "';";
 
-                        List<SqlParameter> parameters = new List<SqlParameter>()
-                    {
-                        new SqlParameter("@username", SqlDbType.VarChar) {Value = username},
-                        new SqlParameter("@title", SqlDbType.VarChar) {Value = title},
-                        new SqlParameter("@quantity", SqlDbType.Int) {Value = quantity}
-                    };
-
-                        DatabaseUtility.ModifyDatabase(_connectionString, commandText, parameters);
+                        DatabaseUtility.ModifyDatabase(_connectionString, commandText);
                     }
                     else
                     {
-                        string commandText = "INSERT INTO " + _rentalTableName + " (Username, Title, Quantity, Price) VALUES (@username,@title,@quantity,@price)";
+                        string commandText = "INSERT INTO " + _rentalTableName + " (Username, Title, Quantity, Price) VALUES ('" + username + "','" + title + "'," + quantity + "," + price + ")";
 
-                        List<SqlParameter> parameters = new List<SqlParameter>()
-                    {
-                        new SqlParameter("@username", SqlDbType.VarChar) {Value = username},
-                        new SqlParameter("@title", SqlDbType.VarChar) {Value = title},
-                        new SqlParameter("@quantity", SqlDbType.Int) {Value = quantity},
-                        new SqlParameter("@price", SqlDbType.Decimal) {Value = price}
-                    };
-
-                        DatabaseUtility.ModifyDatabase(_connectionString, commandText, parameters);
+                        DatabaseUtility.ModifyDatabase(_connectionString, commandText);
                     }
                 }
                 catch (ServerUnavailableException e)
@@ -180,28 +155,15 @@ namespace BetaFastAPI.Rentals
                         throw new RentalDoesNotExistException("Rental " + title + " does not exist");
                     }
 
-                    string commandText = "DELETE FROM " + _rentalTableName + " WHERE Username = @username AND Title = @title;";
+                    string commandText = "DELETE FROM " + _rentalTableName + " WHERE Username = '" + username + "' AND Title = '" + title + "';";
 
-                    List<SqlParameter> parameters = new List<SqlParameter>()
-                {
-                    new SqlParameter("@username", SqlDbType.VarChar) {Value = username},
-                    new SqlParameter("@title", SqlDbType.VarChar) {Value = title}
-                };
-
-                    DatabaseUtility.ModifyDatabase(_connectionString, commandText, parameters);
+                    DatabaseUtility.ModifyDatabase(_connectionString, commandText);
                 }
                 else
                 {
-                    string commandText = "UPDATE " + _rentalTableName + " SET Quantity = Quantity - @quantity WHERE Username = @username AND Title = @title;";
+                    string commandText = "UPDATE " + _rentalTableName + " SET Quantity = Quantity - " + quantity + " WHERE Username = '" + username + "' AND Title = '" + title + "';";
 
-                    List<SqlParameter> parameters = new List<SqlParameter>()
-                    {
-                        new SqlParameter("@username", SqlDbType.VarChar) {Value = username},
-                        new SqlParameter("@title", SqlDbType.VarChar) {Value = title},
-                        new SqlParameter("@quantity", SqlDbType.Int) {Value = quantity}
-                    };
-
-                    DatabaseUtility.ModifyDatabase(_connectionString, commandText, parameters);
+                    DatabaseUtility.ModifyDatabase(_connectionString, commandText);
                 }
             }
             catch (ServerUnavailableException e)
@@ -217,15 +179,9 @@ namespace BetaFastAPI.Rentals
 
             try
             {
-                string commandText = "DELETE FROM " + _rentalTableName + " WHERE Username = @username;";
+                string commandText = "DELETE FROM " + _rentalTableName + " WHERE Username = '" + username + "';";
 
-                SqlParameter param = new SqlParameter
-                {
-                    ParameterName = "@username",
-                    Value = username
-                };
-
-                DatabaseUtility.ModifyDatabase(_connectionString, commandText, param);
+                DatabaseUtility.ModifyDatabase(_connectionString, commandText);
             }
             catch (ServerUnavailableException e)
             {
@@ -235,16 +191,11 @@ namespace BetaFastAPI.Rentals
 
         private int GetQuantity(string username, string title)
         {
-            string commandText = "SELECT * FROM " + _rentalTableName + " WHERE Username = @username AND Title = @title";
-            List<SqlParameter> parameters = new List<SqlParameter>()
-            {
-                new SqlParameter("@username", SqlDbType.VarChar) {Value = username},
-                new SqlParameter("@title", SqlDbType.VarChar) {Value = title}
-            };
+            string commandText = "SELECT * FROM " + _rentalTableName + " WHERE Username = '" + username + "' AND Title = '" + title + "';";
 
             try
             {
-                using (DataTable contents = DatabaseUtility.QueryDatabase(_connectionString, commandText, parameters))
+                using (DataTable contents = DatabaseUtility.QueryDatabase(_connectionString, commandText))
                 {
                     if (contents != null && contents.Rows.Count > 0)
                     {
@@ -264,16 +215,11 @@ namespace BetaFastAPI.Rentals
 
         public decimal GetMoviePrice(string title)
         {
-            string commandText = "SELECT * FROM " + _moviesTableName + " WHERE Title = @title";
-            SqlParameter param = new SqlParameter
-            {
-                ParameterName = "@title",
-                Value = title
-            };
+            string commandText = "SELECT * FROM " + _moviesTableName + " WHERE Title = '" + title + "';";
 
             try
             {
-                using (DataTable contents = DatabaseUtility.QueryDatabase(_connectionString, commandText, param))
+                using (DataTable contents = DatabaseUtility.QueryDatabase(_connectionString, commandText))
                 {
                     if (contents != null && contents.Rows.Count > 0)
                     {
@@ -293,16 +239,11 @@ namespace BetaFastAPI.Rentals
 
         private bool MovieExists(string title)
         {
-            string commandText = "SELECT 1 FROM " + _moviesTableName + " WHERE Title = @title";
-            SqlParameter param = new SqlParameter
-            {
-                ParameterName = "@title",
-                Value = title
-            };
+            string commandText = "SELECT 1 FROM " + _moviesTableName + " WHERE Title = '" + title + "';";
 
             try
             {
-                using (DataTable contents = DatabaseUtility.QueryDatabase(_connectionString, commandText, param))
+                using (DataTable contents = DatabaseUtility.QueryDatabase(_connectionString, commandText))
                 {
                     if (contents.Rows.Count == 0)
                     {

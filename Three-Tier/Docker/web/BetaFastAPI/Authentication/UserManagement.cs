@@ -21,16 +21,11 @@ namespace BetaFastAPI.Authentication
 
         public bool UserExists(string username)
         {
-            string commandText = "SELECT 1 FROM " + _usersTableName + " WHERE Username = @username";
-            SqlParameter param = new SqlParameter
-            {
-                ParameterName = "@username",
-                Value = username
-            };
+            string commandText = "SELECT 1 FROM " + _usersTableName + " WHERE Username = '" + username + "';";
 
             try
             {
-                using (DataTable contents = DatabaseUtility.QueryDatabase(_connectionString, commandText, param))
+                using (DataTable contents = DatabaseUtility.QueryDatabase(_connectionString, commandText))
                 {
                     if (contents.Rows.Count == 0)
                     {
@@ -50,16 +45,11 @@ namespace BetaFastAPI.Authentication
 
         public bool UserExists(int userID)
         {
-            string commandText = "SELECT 1 FROM " + _usersTableName + " WHERE UserID = @userID";
-            SqlParameter param = new SqlParameter
-            {
-                ParameterName = "@userID",
-                Value = userID
-            };
+            string commandText = "SELECT 1 FROM " + _usersTableName + " WHERE UserID = " + userID + ";";
 
             try
             {
-                using (DataTable contents = DatabaseUtility.QueryDatabase(_connectionString, commandText, param))
+                using (DataTable contents = DatabaseUtility.QueryDatabase(_connectionString, commandText))
                 {
                     if (contents.Rows.Count == 0)
                     {
@@ -79,7 +69,7 @@ namespace BetaFastAPI.Authentication
 
         public int TotalUsers()
         {
-            string commandText = "SELECT COUNT(*) FROM " + _usersTableName;
+            string commandText = "SELECT COUNT(*) FROM " + _usersTableName + ";";
             try
             {
                 using (DataTable contents = DatabaseUtility.QueryDatabase(_connectionString, commandText))
@@ -95,7 +85,7 @@ namespace BetaFastAPI.Authentication
 
         public int TotalActiveUsers()
         {
-            string commandText = "SELECT count(*) FROM " + _usersTableName + " WHERE Active=1";
+            string commandText = "SELECT count(*) FROM " + _usersTableName + " WHERE Active=1" + ";";
             try
             {
                 using (DataTable contents = DatabaseUtility.QueryDatabase(_connectionString, commandText))
@@ -111,7 +101,7 @@ namespace BetaFastAPI.Authentication
 
         public int TotalInactiveUsers()
         {
-            string commandText = "SELECT count(*) FROM " + _usersTableName + " WHERE Active=0";
+            string commandText = "SELECT count(*) FROM " + _usersTableName + " WHERE Active=0" + ";";
             try
             {
                 using (DataTable contents = DatabaseUtility.QueryDatabase(_connectionString, commandText))
@@ -144,25 +134,13 @@ namespace BetaFastAPI.Authentication
             string salt = Hashing.CreateSalt(16);
             string hashedPassword = Hashing.GenerateSaltedHash(password, salt);
 
-            string commandText = "INSERT INTO " + _usersTableName + " (UserID, LastName, FirstName, Username, Password, Salt, Role, Active) VALUES (@userID,@lastName,@firstName,@username,@password,@salt,@role,@active)";
-
             int newUserID = TotalUsers() + 1;
 
-            List<SqlParameter> parameters = new List<SqlParameter>()
-            {
-                 new SqlParameter("@userID", SqlDbType.Int) {Value = newUserID},
-                 new SqlParameter("@lastName", SqlDbType.VarChar) {Value = lastName},
-                 new SqlParameter("@firstName", SqlDbType.VarChar) {Value = firstName},
-                 new SqlParameter("@username", SqlDbType.VarChar) {Value = username},
-                 new SqlParameter("@password", SqlDbType.VarChar) {Value = hashedPassword},
-                 new SqlParameter("@salt", SqlDbType.VarChar) {Value = salt},
-                 new SqlParameter("@role", SqlDbType.Int) {Value = (int) role},
-                 new SqlParameter("@active", SqlDbType.Bit) {Value = 1}
-            };
+            string commandText = "INSERT INTO " + _usersTableName + " (UserID, LastName, FirstName, Username, Password, Salt, Role, Active) VALUES ('" + newUserID + "','" + lastName + "','" + firstName + "','" + username + "','" + hashedPassword + "','" + salt + "','" + (int) role + "'," + "1" + ")";
 
             try
             {
-                DatabaseUtility.ModifyDatabase(_connectionString, commandText, parameters);
+                DatabaseUtility.ModifyDatabase(_connectionString, commandText);
             }
             catch (ServerUnavailableException)
             {
@@ -182,17 +160,11 @@ namespace BetaFastAPI.Authentication
                 throw new UserDoesNotExistException("User " + username + " does not exist");
             }
 
-            string commandText = "DELETE FROM " + _usersTableName + " WHERE Username = @username;";
-
-            SqlParameter param = new SqlParameter
-            {
-                ParameterName = "@username",
-                Value = username
-            };
+            string commandText = "DELETE FROM " + _usersTableName + " WHERE Username = '" + username + "';";
 
             try
             {
-                DatabaseUtility.ModifyDatabase(_connectionString, commandText, param);
+                DatabaseUtility.ModifyDatabase(_connectionString, commandText);
             }
             catch (ServerUnavailableException)
             {
@@ -207,17 +179,11 @@ namespace BetaFastAPI.Authentication
                 throw new UserDoesNotExistException("User " + userID + " does not exist");
             }
 
-            string commandText = "UPDATE " + _usersTableName + "; SET Active = 0 WHERE UserID = @userID;";
-
-            SqlParameter param = new SqlParameter
-            {
-                ParameterName = "@userID",
-                Value = userID
-            };
+            string commandText = "UPDATE " + _usersTableName + "; SET Active = 0 WHERE UserID = " + userID + ";";
 
             try
             {
-                DatabaseUtility.ModifyDatabase(_connectionString, commandText, param);
+                DatabaseUtility.ModifyDatabase(_connectionString, commandText);
             }
             catch (ServerUnavailableException)
             {
@@ -237,17 +203,11 @@ namespace BetaFastAPI.Authentication
                 throw new UserDoesNotExistException("User " + username + " does not exist");
             }
 
-            string commandText = "UPDATE " + _usersTableName + "; SET Active = 0 WHERE Username = @username;";
-
-            SqlParameter param = new SqlParameter
-            {
-                ParameterName = "@username",
-                Value = username
-            };
+            string commandText = "UPDATE " + _usersTableName + "; SET Active = 0 WHERE Username = '" + username + "';";
 
             try
             {
-                DatabaseUtility.ModifyDatabase(_connectionString, commandText, param);
+                DatabaseUtility.ModifyDatabase(_connectionString, commandText);
             }
             catch (ServerUnavailableException)
             {
@@ -262,17 +222,11 @@ namespace BetaFastAPI.Authentication
                 throw new UserDoesNotExistException("User " + userID + " does not exist");
             }
 
-            string commandText = "UPDATE " + _usersTableName + "; SET Active = 1 WHERE UserID = @userID;";
-
-            SqlParameter param = new SqlParameter
-            {
-                ParameterName = "@userID",
-                Value = userID
-            };
+            string commandText = "UPDATE " + _usersTableName + "; SET Active = 1 WHERE UserID = " + userID + ";";
 
             try
             {
-                DatabaseUtility.ModifyDatabase(_connectionString, commandText, param);
+                DatabaseUtility.ModifyDatabase(_connectionString, commandText);
             }
             catch (ServerUnavailableException)
             {
@@ -292,17 +246,11 @@ namespace BetaFastAPI.Authentication
                 throw new UserDoesNotExistException("User " + username + " does not exist");
             }
 
-            string commandText = "UPDATE " + _usersTableName + "; SET Active = 1 WHERE Username = @username;";
-
-            SqlParameter param = new SqlParameter
-            {
-                ParameterName = "@username",
-                Value = username
-            };
+            string commandText = "UPDATE " + _usersTableName + "; SET Active = 1 WHERE Username = '" + username + "';";
 
             try
             {
-                DatabaseUtility.ModifyDatabase(_connectionString, commandText, param);
+                DatabaseUtility.ModifyDatabase(_connectionString, commandText);
             }
             catch (ServerUnavailableException)
             {
@@ -317,14 +265,11 @@ namespace BetaFastAPI.Authentication
                 throw new ArgumentNullException("Username");
             }
 
-            string commandText = "SELECT * from " + _usersTableName + " where username = @username";
-            List<SqlParameter> parameters = new List<SqlParameter>()
-            {
-                 new SqlParameter("@username", SqlDbType.VarChar) {Value = username},
-            };
+            string commandText = "SELECT * from " + _usersTableName + " WHERE Username = '" + username + "';";
+
             try
             {
-                using (DataTable contents = DatabaseUtility.QueryDatabase(_connectionString, commandText, parameters))
+                using (DataTable contents = DatabaseUtility.QueryDatabase(_connectionString, commandText))
                 {
                     if (contents != null && contents.Rows.Count > 0)
                     {
@@ -360,14 +305,11 @@ namespace BetaFastAPI.Authentication
                 throw new ArgumentNullException("Username");
             }
 
-            string commandText = "SELECT * from " + _usersTableName + " where username = @username";
-            List<SqlParameter> parameters = new List<SqlParameter>()
-            {
-                 new SqlParameter("@username", SqlDbType.VarChar) {Value = username},
-            };
+            string commandText = "SELECT * FROM " + _usersTableName + " WHERE Username = '" + username + "';";
+
             try
             {
-                using (DataTable contents = DatabaseUtility.QueryDatabase(_connectionString, commandText, parameters))
+                using (DataTable contents = DatabaseUtility.QueryDatabase(_connectionString, commandText))
                 {
                     if (contents != null && contents.Rows.Count > 0)
                     {
@@ -394,15 +336,11 @@ namespace BetaFastAPI.Authentication
 
         public bool IsAdmin(int userID)
         {
-            string commandText = "SELECT * from " + _usersTableName + " where UserID = @userID";
-            List<SqlParameter> parameters = new List<SqlParameter>()
-            {
-                 new SqlParameter("@userID", SqlDbType.VarChar) {Value = userID},
-            };
+            string commandText = "SELECT * from " + _usersTableName + " where UserID = " + userID;
 
             try
             {
-                using (DataTable contents = DatabaseUtility.QueryDatabase(_connectionString, commandText, parameters))
+                using (DataTable contents = DatabaseUtility.QueryDatabase(_connectionString, commandText))
                 {
                     if (contents != null && contents.Rows.Count > 0)
                     {
@@ -434,15 +372,11 @@ namespace BetaFastAPI.Authentication
             if (string.IsNullOrEmpty(password))
                 throw new ArgumentNullException("Password");
 
-            string commandText = "SELECT * from " + _usersTableName + " where username = @username";
-            List<SqlParameter> parameters = new List<SqlParameter>()
-            {
-                 new SqlParameter("@username", SqlDbType.VarChar) {Value = username},
-            };
+            string commandText = "SELECT * FROM " + _usersTableName + " WHERE Username = '" + username + "';";
 
             try
             {
-                using (DataTable contents = DatabaseUtility.QueryDatabase(_connectionString, commandText, parameters))
+                using (DataTable contents = DatabaseUtility.QueryDatabase(_connectionString, commandText))
                 {
                     if (contents != null && contents.Rows.Count > 0)
                     {
@@ -477,15 +411,11 @@ namespace BetaFastAPI.Authentication
                 throw new ArgumentNullException("Password");
             }
 
-            string commandText = "SELECT * from " + _usersTableName + " where UserID = @userID";
-            List<SqlParameter> parameters = new List<SqlParameter>()
-            {
-                 new SqlParameter("@userID", SqlDbType.Int) {Value = userID},
-            };
+            string commandText = "SELECT * FROM " + _usersTableName + " WHERE UserID = " + userID;
 
             try
             {
-                using (DataTable contents = DatabaseUtility.QueryDatabase(_connectionString, commandText, parameters))
+                using (DataTable contents = DatabaseUtility.QueryDatabase(_connectionString, commandText))
                 {
                     if (contents != null && contents.Rows.Count > 0)
                     {
@@ -515,12 +445,11 @@ namespace BetaFastAPI.Authentication
 
         public UserModel GetUser(int userID)
         {
-            string commandText = "SELECT * from " + _usersTableName + " where UserID = @userID";
-            SqlParameter parameter = new SqlParameter("@userID", SqlDbType.VarChar) { Value = userID };
+            string commandText = "SELECT * FROM " + _usersTableName + " WHERE UserID = " + userID;
 
             try
             {
-                using (DataTable contents = DatabaseUtility.QueryDatabase(_connectionString, commandText, parameter))
+                using (DataTable contents = DatabaseUtility.QueryDatabase(_connectionString, commandText))
                 {
                     UserModel output = null;
                     if (contents != null && contents.Rows.Count > 0)
@@ -554,12 +483,11 @@ namespace BetaFastAPI.Authentication
                 throw new ArgumentNullException("Username");
             }
 
-            string commandText = "SELECT * from " + _usersTableName + " where Username = @username";
-            SqlParameter parameter = new SqlParameter("@username", SqlDbType.VarChar) { Value = username };
+            string commandText = "SELECT * FROM " + _usersTableName + " WHERE Username = '" + username + "';";
 
             try
             {
-                using (DataTable contents = DatabaseUtility.QueryDatabase(_connectionString, commandText, parameter))
+                using (DataTable contents = DatabaseUtility.QueryDatabase(_connectionString, commandText))
                 {
                     UserModel output = null;
                     if (contents != null && contents.Rows.Count > 0)
@@ -588,7 +516,7 @@ namespace BetaFastAPI.Authentication
 
         public List<UserModel> GetAllUsers()
         {
-            string commandText = "SELECT * from " + _usersTableName;
+            string commandText = "SELECT * FROM " + _usersTableName;
 
             try
             {
@@ -637,17 +565,11 @@ namespace BetaFastAPI.Authentication
             if (UserExists(newUsername))
                 throw new UserExistsException();
 
-            string commandText = "UPDATE " + _usersTableName + " SET Username = @newUsername WHERE Username = @currentUsername;";
-
-            List<SqlParameter> parameters = new List<SqlParameter>()
-            {
-                 new SqlParameter("@newUsername", SqlDbType.VarChar) {Value = newUsername},
-                 new SqlParameter("@currentUsername", SqlDbType.VarChar) {Value = currentUsername}
-            };
+            string commandText = "UPDATE " + _usersTableName + " SET Username = '" + newUsername + "' WHERE Username = '" + currentUsername + "';";
 
             try
             {
-                DatabaseUtility.ModifyDatabase(_connectionString, commandText, parameters);
+                DatabaseUtility.ModifyDatabase(_connectionString, commandText);
             }
             catch (ServerUnavailableException)
             {
@@ -667,17 +589,11 @@ namespace BetaFastAPI.Authentication
             if (!UserExists(username))
                 throw new UserDoesNotExistException("User " + username + " does not exist");
 
-            string commandText = "UPDATE " + _usersTableName + " SET FirstName = @newFirstName WHERE Username = @username;";
-
-            List<SqlParameter> parameters = new List<SqlParameter>()
-            {
-                 new SqlParameter("@newFirstName", SqlDbType.VarChar) {Value = newFirstName},
-                 new SqlParameter("@username", SqlDbType.VarChar) {Value = username}
-            };
+            string commandText = "UPDATE " + _usersTableName + " SET FirstName = '" + newFirstName + "' WHERE Username = '" + username + "';";
 
             try
             {
-                DatabaseUtility.ModifyDatabase(_connectionString, commandText, parameters);
+                DatabaseUtility.ModifyDatabase(_connectionString, commandText);
             }
             catch (ServerUnavailableException)
             {
@@ -697,17 +613,11 @@ namespace BetaFastAPI.Authentication
             if (!UserExists(username))
                 throw new UserDoesNotExistException("User " + username + " does not exist");
 
-            string commandText = "UPDATE " + _usersTableName + " SET LastName = @newLastName WHERE Username = @username;";
-
-            List<SqlParameter> parameters = new List<SqlParameter>()
-            {
-                 new SqlParameter("@newLastName", SqlDbType.VarChar) {Value = newLastName},
-                 new SqlParameter("@username", SqlDbType.VarChar) {Value = username}
-            };
+            string commandText = "UPDATE " + _usersTableName + " SET LastName = '" + newLastName + "' WHERE Username = '" + username + "';";
 
             try
             {
-                DatabaseUtility.ModifyDatabase(_connectionString, commandText, parameters);
+                DatabaseUtility.ModifyDatabase(_connectionString, commandText);
             }
             catch (ServerUnavailableException)
             {
@@ -736,15 +646,9 @@ namespace BetaFastAPI.Authentication
             {
                 if (CorrectPassword(username, currentPassword))
                 {
-                    string commandText = "UPDATE " + _usersTableName + " SET Salt = @newSalt , Password = @newHashedPassword WHERE Username = @username;";
+                    string commandText = "UPDATE " + _usersTableName + " SET Salt = '" + newSalt + "' , Password = '" + newHashedPassword + "' WHERE Username = '" + username + "';";
 
-                    List<SqlParameter> parameters = new List<SqlParameter>()
-                    {
-                        new SqlParameter("@newSalt", SqlDbType.VarChar) {Value = newSalt},
-                        new SqlParameter("@username", SqlDbType.VarChar) {Value = username},
-                        new SqlParameter("@newHashedPassword", SqlDbType.VarChar) {Value = newHashedPassword}
-                    };
-                    DatabaseUtility.ModifyDatabase(_connectionString, commandText, parameters);
+                    DatabaseUtility.ModifyDatabase(_connectionString, commandText);
                 }
                 else
                 {
@@ -765,17 +669,11 @@ namespace BetaFastAPI.Authentication
             if (!UserExists(username))
                 throw new UserDoesNotExistException("User " + username + " does not exist");
 
-            string commandText = "UPDATE " + _usersTableName + " SET Role = @role WHERE Username = @username;";
-
-            List<SqlParameter> parameters = new List<SqlParameter>()
-            {
-                 new SqlParameter("@role", SqlDbType.VarChar) {Value = newRole},
-                 new SqlParameter("@username", SqlDbType.VarChar) {Value = username}
-            };
+            string commandText = "UPDATE " + _usersTableName + " SET Role = " + newRole + " WHERE Username = '" + username + "';";
 
             try
             {
-                DatabaseUtility.ModifyDatabase(_connectionString, commandText, parameters);
+                DatabaseUtility.ModifyDatabase(_connectionString, commandText);
             }
             catch (ServerUnavailableException)
             {

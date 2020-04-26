@@ -19,7 +19,6 @@ namespace BetaFast.ViewModel
         private string _cvc;
         private string _expiryDate;
         private string _zipCode;
-        private string _password;
 
         private string _currentUsername;
 
@@ -30,7 +29,6 @@ namespace BetaFast.ViewModel
         private long _cardNumberLong;
         private int _cvcInt;
         private int _zipCodeInt;
-        private int _passwordInt;
 
         private ICommand _pay;
         private ICommand _delete;
@@ -119,19 +117,6 @@ namespace BetaFast.ViewModel
             }
         }
 
-        public string Password
-        {
-            get { return _password; }
-            set
-            {
-                if (_password != value)
-                {
-                    _password = value;
-                    OnPropertyChanged("Password");
-                }
-            }
-        }
-
         public decimal TotalPrice
         {
             get { return _totalPrice; }
@@ -183,23 +168,12 @@ namespace BetaFast.ViewModel
         {
             if (_isUsernameValid)
             {
-                if (IsPasswordValid())
+                if (File.Exists(GetPaymentDetailsPath()))
                 {
-                    if (File.Exists(GetPaymentDetailsPath()))
+                    try
                     {
-                        string decryptedPaymentDetails;
-                        try
-                        {
-                            byte[] encryptedPaymentDetailsBytes = File.ReadAllBytes(GetPaymentDetailsPath());
-                            decryptedPaymentDetails = EncryptionUtility.Decrypt(encryptedPaymentDetailsBytes, Password);
-                        }
-                        catch
-                        {
-                            Message = "An error occurred loading payment information.";
-                            return;
-                        }
-
-                        string[] details = decryptedPaymentDetails.Split('\n');
+                        byte[] paymentDetailsBytes = File.ReadAllBytes(GetPaymentDetailsPath());
+                        string[] details = System.Text.Encoding.UTF8.GetString(paymentDetailsBytes).Split('\n');
                         if (details.Length != 5)
                         {
                             Message = "Saved payment details were invalid.";
@@ -214,10 +188,15 @@ namespace BetaFast.ViewModel
                             ZipCode = details[4];
                         }
                     }
-                    else
+                    catch
                     {
-                        Message = "No saved payment details were found.";
+                        Message = "An error occurred loading payment information.";
+                        return;
                     }
+                }
+                else
+                {
+                    Message = "No saved payment details were found.";
                 }
             }
             else
@@ -237,8 +216,8 @@ namespace BetaFast.ViewModel
                     {
                         FileInfo file = new FileInfo(GetPaymentDetailsPath());
                         file.Directory.Create();
-                        File.WriteAllBytes(GetPaymentDetailsPath(), EncryptionUtility.Encrypt(contents, CVC));
-                        FileUtility.SetReadWriteCurrentUser(GetPaymentDetailsPath());
+                        File.WriteAllBytes(GetPaymentDetailsPath(), System.Text.Encoding.UTF8.GetBytes(contents));
+                        FileUtility.SetReadAllUsers(GetPaymentDetailsPath());
                     }
                     catch
                     {
@@ -283,7 +262,7 @@ namespace BetaFast.ViewModel
         {
             if (_isUsernameValid)
             {
-                string fileName = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + @"\BetaFast\PaymentDetails\" + _currentUsername + ".txt");
+                string fileName = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) + @"\BetaFast\PaymentDetails\" + _currentUsername + ".txt");
                 return fileName;
             }
             else
@@ -307,24 +286,6 @@ namespace BetaFast.ViewModel
             ZipCode = string.Empty;
             Message = string.Empty;
             TotalPrice = 0.00M;
-        }
-
-        private bool IsPasswordValid()
-        {
-            if (!string.IsNullOrEmpty(Password))
-            {
-                if (!Int32.TryParse(Password, out _passwordInt))
-                {
-                    Message = "CVC is invalid";
-                    return false;
-                }
-
-                return true;
-            }
-            else
-            {
-                return false;
-            }
         }
 
         private bool IsFormValid()

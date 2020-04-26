@@ -31,7 +31,7 @@ namespace BetaFastAPI.Controllers
                 }
                 else
                 {
-                    return NotFound("The file could not be found.");
+                    return PhysicalFile(image, "application/octet-stream");
                 }
             }
             else
