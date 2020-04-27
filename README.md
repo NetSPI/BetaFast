@@ -4,7 +4,7 @@
 BetaFast is the provider of a premier Betamax rental kiosk. Browse the wide selection of movies and begin renting today!
 
 ## Releases
-Two versions of BetaFast have been released. One is written with three-tier architecture, the other two-tier architecture. Both releases contains but is not limited to the following vulnerabilities:
+Two versions of BetaFast have been released. One is written with three-tier architecture, the other two-tier architecture. Both releases contain but are not limited to the following vulnerabilities:
 * Hardcoded Encryption Data
 * Hardcoded Encrypted Password
 * SQL Injection
