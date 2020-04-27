@@ -38,4 +38,4 @@ To launch the servers, use the following commands in the same directory as docke
 
 When testing is completed, stop the containers using Ctrl - C and then type `docker-compose down`.
 
-Note - by default, the web server is available on 127.0.0.1:8080. Therefore, if testing with docker on the same machine as the client, do not run a system proxy on 127.0.0.1:8080. Also, I like to modify the hosts file to have www.betafast.com resolve to 127.0.0.1. I then change the BetaFast client to point to http://www.betafast.com:8080 in the configuration file.
+Note - by default, the web server is available on 127.0.0.1:8080. Therefore, if testing with docker on the same machine as the client, do not run a system proxy on 127.0.0.1:8080. Also, I like to modify the hosts file to have www.betafast.net resolve to 127.0.0.1. I then change the BetaFast client to point to http://www.betafast.net:8080 in the configuration file.
