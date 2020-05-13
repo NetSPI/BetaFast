@@ -26,7 +26,7 @@ Beta Bank was written to include many of the above findings while highlighting s
 
 BetaFast and Beta Bank were developed in conjunction with our blog series Introduction to Hacking Thick Clients. An overview and further instructions can be found at https://blog.netspi.com/introducing-betafast/.
 
-** Published Blog Entries: **
+**Published Blog Entries:**
 * [The GUI](https://blog.netspi.com/introduction-to-hacking-thick-clients-part-1-the-gui/)
 
 ## The Client
