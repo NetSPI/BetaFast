@@ -1,0 +1,119 @@
+﻿<UserControl x:Class="BetaBank.View.AdminView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:BetaBank.View"
+             xmlns:controls="clr-namespace:BetaBank.View.Controls"
+             Background="Silver"
+             mc:Ignorable="d"
+             d:DesignHeight="750"
+             d:DesignWidth="1200"
+             MinHeight="750"
+             MinWidth="1200">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="25" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <controls:NavigationBar />
+
+        <Grid Grid.Row="1"
+              Grid.Column="0"
+              HorizontalAlignment="Center"
+              VerticalAlignment="Top">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="100" />
+                <RowDefinition Height="625" />
+            </Grid.RowDefinitions>
+
+            <!-- Welcome Message -->
+            <TextBlock Text="Please, enjoy our administrator functionality at your leisure"
+                       Grid.Row="0"
+                       Grid.Column="0"
+                       Margin="0,0,0,0"
+                       TextWrapping="Wrap"
+                       Width="800"
+                       TextAlignment="Center"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"
+                       FontSize="32">
+            </TextBlock>
+
+            <Grid Grid.Row="1"
+                  Grid.Column="0"
+                  HorizontalAlignment="Center"
+                  VerticalAlignment="Top">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="300" />
+                </Grid.RowDefinitions>
+
+                <StackPanel Grid.Row="0"
+                            Grid.Column="0"
+                            Orientation="Vertical"
+                            Margin="0,100,0,0"
+                            VerticalAlignment="Top"
+                            HorizontalAlignment="Center">
+                    <TextBlock Text="Shall you be needing the vault location?"
+                               Margin="0,0,0,0"
+                               TextWrapping="Wrap"
+                               Width="600"
+                               TextAlignment="Center"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               FontSize="24">
+                    </TextBlock>
+
+                    <StackPanel Orientation="Horizontal"
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Center">
+                        <Button x:Name="Yes"
+                                Grid.Column="0"
+                                Command="{Binding Yes}"
+                                Margin="0,20,40,20"
+                                Width="100"
+                                Height="32"
+                                Content="Indeed"
+                                FontSize="16"
+                                HorizontalAlignment="Center"
+                                Background="{StaticResource BetaBankLight}"
+                                Foreground="White" />
+
+                        <Button x:Name="No"
+                                Grid.Column="0"
+                                Command="{Binding No}"
+                                Margin="40,20,0,20"
+                                Width="170"
+                                Height="32"
+                                Content="Not today, thank you"
+                                FontSize="16"
+                                HorizontalAlignment="Center"
+                                Background="{StaticResource BetaBankLight}"
+                                Foreground="White" />
+                    </StackPanel>
+
+                    <TextBlock Text="{Binding Address}"
+                               Margin="0,0,0,0"
+                               TextWrapping="Wrap"
+                               Width="600"
+                               TextAlignment="Center"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               FontSize="24">
+                    </TextBlock>
+                </StackPanel>
+            </Grid>
+        </Grid>
+    </Grid>
+</UserControl>

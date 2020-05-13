@@ -1,0 +1,28 @@
+﻿<Application x:Class="BetaBank.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:BetaBank"
+             xmlns:ViewModel="clr-namespace:BetaBank.ViewModel"
+             xmlns:View="clr-namespace:BetaBank.View"
+             StartupUri="View/MainWindow.xaml">
+    <Application.Resources>
+        <ViewModel:MainViewModel x:Key="MainViewModel" />
+        <DataTemplate DataType="{x:Type ViewModel:LoginViewModel}">
+            <View:LoginView />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type ViewModel:RegisterViewModel}">
+            <View:RegisterView />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type ViewModel:HomeViewModel}">
+            <View:HomeView />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type ViewModel:AdminViewModel}">
+            <View:AdminView />
+        </DataTemplate>
+
+        <BitmapImage x:Key="BetaBankLogo"
+                     UriSource="/Images/BetaBankLogo.png" />
+        <SolidColorBrush x:Key="BetaBankDark">#535248</SolidColorBrush>
+        <SolidColorBrush x:Key="BetaBankLight">#dca423</SolidColorBrush>
+    </Application.Resources>
+</Application>

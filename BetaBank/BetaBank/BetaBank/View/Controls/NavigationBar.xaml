@@ -1,0 +1,68 @@
+﻿<UserControl x:Class="BetaBank.View.Controls.NavigationBar"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:BetaBank.View.Controls"
+             mc:Ignorable="d"
+             d:DesignHeight="450"
+             d:DesignWidth="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <!-- Back Button -->
+        <Button x:Name="BackButton"
+                Grid.Row="0"
+                Grid.Column="0"
+                Command="{Binding Back}"
+                Margin="0,0,40,0"
+                Width="60"
+                Height="25"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Background="{StaticResource BetaBankLight}"
+                FontFamily="Segoe MDL2 Assets"
+                FontSize="16"
+                Content="&#xE72B;"
+                Foreground="White"
+                Visibility="{Binding HomeVisibility}" />
+
+        <!-- Admin -->
+        <Button x:Name="SettingsButton"
+                Grid.Row="0"
+                Grid.Column="0"
+                Command="{Binding Admin}"
+                Margin="0,0,60,0"
+                Width="60"
+                Height="25"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Top"
+                Background="{StaticResource BetaBankLight}"
+                FontFamily="Segoe MDL2 Assets"
+                FontSize="16"
+                Content="&#xE7EF;"
+                Foreground="White"
+                Visibility="{Binding AdminVisibility}"/>
+
+        <!-- Sign Out -->
+        <Button x:Name="SignOutButton"
+                Grid.Row="0"
+                Grid.Column="0"
+                Command="{Binding SignOut}"
+                Margin="0,0,0,0"
+                Width="60"
+                Height="25"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Top"
+                Background="{StaticResource BetaBankLight}"
+                FontFamily="Segoe MDL2 Assets"
+                FontSize="16"
+                Content="&#xF3B1;"
+                Foreground="White" />
+    </Grid>
+</UserControl>
