@@ -30,6 +30,7 @@ BetaFast and Beta Bank were developed in conjunction with our blog series Introd
 * [The GUI](https://blog.netspi.com/introduction-to-hacking-thick-clients-part-1-the-gui/)
 * [The Network](https://blog.netspi.com/introduction-to-hacking-thick-clients-part-2-the-network/)
 * [The File System and Registry](https://blog.netspi.com/introduction-to-hacking-thick-clients-part-3/)
+* [The Assemblies](https://blog.netspi.com/introduction-to-hacking-thick-clients-part-4-the-assemblies/)
 
 ## The Client
 To use the client, open either the BetaFast or Beta Bank solution in Visual Studio and compile the source code. The solution uses .Net Framework 4.6.1.
